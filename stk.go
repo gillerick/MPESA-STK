@@ -33,7 +33,7 @@ func getMPESAToken() (interface{}, error) {
 
 //Since Golang drops specified headers on redirects
 func redirectPolicyFunc(req *http.Request, via []*http.Request) error {
-	req.Header.Add("Authorization", "Basic " + BasicAuth(CONSUMER_KEY, CONSUMER_SECRET))
+	req.SetBasicAuth(CONSUMER_KEY, CONSUMER_SECRET)
 	return nil
 }
 
