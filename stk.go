@@ -15,13 +15,12 @@ const API_URL = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=cl
 
 func main(){
 	//Parse body from response
-	response := getMPESAToken()
-
+	response, _ := getMPESAToken()
 
 
 }
 
-func getMPESAToken() interface{} {
+func getMPESAToken() (interface{}, error) {
 	client := &http.Client{
 		Jar: http.CookieJar(nil),
 		CheckRedirect: redirectPolicyFunc,
@@ -35,7 +34,7 @@ func getMPESAToken() interface{} {
 	if err != nil{
 		panic(err)
 	}
-	return responseData
+	return json.Marshal(responseData)
 }
 
 //Since Golang drops specified headers on redirects
